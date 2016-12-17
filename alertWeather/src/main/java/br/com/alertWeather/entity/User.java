@@ -21,16 +21,16 @@ public class User {
 	private Integer id;
 	
 	
-	@Column (name="name", nullable=false)
+	@Column (name="NAME", nullable=false)
 	private String name;
 	
 	
-	@Column (name="password")
+	@Column (name="PASSWORD")
     private String password;
 	
-//	
-//	@OneToMany(mappedBy="user")
-//	private List<Alert> alerts;
+	
+	@OneToMany(mappedBy="user")
+	private List<Alert> alerts;
 
 
 	public Integer getId() {
@@ -62,19 +62,16 @@ public class User {
 		this.password = password;
 	}
 
-//
-//	public List<Alert> getAlerts() {
-//		return alerts;
-//	}
-//
-//
-//	public void setAlerts(List<Alert> alerts) {
-//		this.alerts = alerts;
-//	}
-//	
-//	
 	
 	
+	public List<Alert> getAlerts() {
+		return alerts;
+	}
+
+	public void setAlerts(List<Alert> alerts) {
+
+		this.alerts = alerts;
+}
 	
 	
 	

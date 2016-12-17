@@ -47,34 +47,34 @@ public abstract class GenericRepository<T> {
 		return result;
 	}
 	
-	protected List<T> pageList(StringBuilder sql, Map<String, Object> parametros, Integer pagina, Integer quantidadePagina){
+	protected List<T> pageList(StringBuilder sql, Map<String, Object> parameters, Integer page, Integer qntPage){
 		instanceClass();
 		
 		TypedQuery<T> query = entityManager.createQuery(sql.toString(), classe);
-		setParameters(query, parametros);
+		setParameters(query, parameters);
 		
-		if(pagina != null && quantidadePagina != null){
-			query.setFirstResult(page(pagina, quantidadePagina));
-			query.setMaxResults(quantidadePagina);
+		if(page != null && qntPage != null){
+			query.setFirstResult(page(page, qntPage));
+			query.setMaxResults(qntPage);
 		}
 		
 		return query.getResultList();		
 	}
 	
-	protected List<T> list(StringBuilder sql, Map<String, Object> parametros){
-		return pageList(sql, parametros, null, null);		
+	protected List<T> list(StringBuilder sql, Map<String, Object> parameters){
+		return pageList(sql, parameters, null, null);		
 	}
 
 
-	protected void setParameters(TypedQuery<T> query, Map<String, Object> parametros){
-		for (String key : parametros.keySet()) {
-			query.setParameter(key, parametros.get(key));
+	protected void setParameters(TypedQuery<T> query, Map<String, Object> parameters){
+		for (String key : parameters.keySet()) {
+			query.setParameter(key, parameters.get(key));
 		}
 	}
 
-	protected void setParameters(Query query, Map<String, Object> parametros){
-		for (String key : parametros.keySet()) {
-			query.setParameter(key, parametros.get(key));
+	protected void setParameters(Query query, Map<String, Object> parameters){
+		for (String key : parameters.keySet()) {
+			query.setParameter(key, parameters.get(key));
 		}
 	}
 

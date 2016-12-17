@@ -17,7 +17,7 @@ public class UserRepository extends GenericRepository<User> {
 	@Transactional
 	public Long counter(String name, String password) {
 
-		StringBuilder sql = new StringBuilder("SELECT COUNT(c) FROM USER c ");
+		StringBuilder sql = new StringBuilder("SELECT COUNT(c) FROM User c ");
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
@@ -48,7 +48,7 @@ public class UserRepository extends GenericRepository<User> {
 
 		}
 		
-		if (!AlertWeatherUtil.isNullOrEmpty(name)) {
+		if (!AlertWeatherUtil.isNullOrEmpty(password)) {
 			setSQL(sql, "c.password LIKE :password");
 			parameters.put(password, "%" + password + "%");
 

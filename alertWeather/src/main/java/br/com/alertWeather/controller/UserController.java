@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.alertWeather.entity.User;
 import br.com.alertWeather.services.UserService;
+import br.com.alertWeather.controller.GenericController;
 
 @Controller
 @RequestMapping("/users")
@@ -57,7 +58,7 @@ public class UserController extends GenericController<User> {
 	}
 	 
 	
-	@RequestMapping(headers = "Accept=application/json", value = "/{id}")
+	@RequestMapping(headers = "Accept=application/json", value = "/{id}" )
 	@ResponseBody
 	public ResponseEntity<String> seachObject(@PathVariable("id") int id) {
 
