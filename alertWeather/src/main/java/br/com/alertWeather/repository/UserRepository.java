@@ -22,12 +22,12 @@ public class UserRepository extends GenericRepository<User> {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
 		if (!AlertWeatherUtil.isNullOrEmpty(name)) {
-			setSQL(sql, "c.name LIKE : name");
+			setSQL(sql, "c.name LIKE :name");
 			parameters.put("name", "%" + name + "%");
 		}
 
 		if (!AlertWeatherUtil.isNullOrEmpty(password)) {
-			setSQL(sql, "c.password LIKE : password");
+			setSQL(sql, "c.password LIKE :password");
 			parameters.put("password", "%" + password + "%");
 		}
 
@@ -38,7 +38,7 @@ public class UserRepository extends GenericRepository<User> {
 	@Transactional
 	public List<User> search(String name, String password) {
 
-		StringBuilder sql = new StringBuilder("SELEC c FROM User c");
+		StringBuilder sql = new StringBuilder("SELECT c FROM User c");
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
 

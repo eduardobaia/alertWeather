@@ -27,10 +27,10 @@ public class AlertController extends GenericController<Alert> {
 	@ResponseBody
 	public ResponseEntity<String> seach(
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "description") String description,
-			@RequestParam(value = "temp") String temp,
-			@RequestParam(value = "city") String city,
-			@RequestParam(value = "state") String state,
+			@RequestParam(value = "description" ,required = false) String description,
+			@RequestParam(value = "temp",required = false) String temp,
+			@RequestParam(value = "city",required = false) String city,
+			@RequestParam(value = "state",required = false) String state,
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(value = "qntPage", required = false, defaultValue = "10") Integer qntPage) {
 
