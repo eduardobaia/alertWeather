@@ -13,20 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.alertWeather.entity.User;
-import br.com.alertWeather.services.UserService;
+import br.com.alertWeather.entity.Alert;
+import br.com.alertWeather.services.AlertService;
 
 @Controller
-@RequestMapping("/users")
-public class UserController extends GenericController<User> {
+@RequestMapping("/alerts")
+public class AlertController extends GenericController<Alert> {
 
 	@Autowired
-	private UserService userService;
+	private AlertService alertService;
 
 	@RequestMapping(headers = "Accept=application/json")
 	@ResponseBody
-	public ResponseEntity<String> seach(@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "password", required = false) String password,
+	public ResponseEntity<String> seach(
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "description") String description,
+			@RequestParam(value = "temp") String temp,
+			@RequestParam(value = "city") String city,
+			@RequestParam(value = "state") String state,
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 			@RequestParam(value = "qntPage", required = false, defaultValue = "10") Integer qntPage) {
 
@@ -34,46 +38,48 @@ public class UserController extends GenericController<User> {
 		headers.add("Content-Type", "application/json; charset=utf-8");
 
 		Long counter = 0L;
-		List<User> list = new ArrayList<User>();
+		List<Alert> list = new ArrayList<Alert>();
 		boolean pagination = false;
 
 		if (page != 0) {
-			counter = userService.counter(name, password);
+			counter = alertService
+					.counter(name, description, temp, city, state);
 			pagination = true;
 		}
 
 		if (pagination) {
 
 			if (counter != 0) {
-				list = userService.list(name, password);
+				list = alertService.list(name, description, temp, city, state);
 			} else {
-				list = userService.list(name, password);
+				list = alertService.list(name, description, temp, city, state);
 			}
 
 		}
- 
-	return new ResponseEntity<String>(toJson(counter, list), headers, HttpStatus.OK);
+
+		return new ResponseEntity<String>(toJson(counter, list), headers,
+				HttpStatus.OK);
 
 	}
-	 
 	
 	@RequestMapping(headers = "Accept=application/json", value = "/{id}" )
 	@ResponseBody
-	public ResponseEntity<String> seachObject(@PathVariable("id") int id) {
+	public ResponseEntity<String>  seachObject (@PathVariable("id") int id){
+		
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json; charset=utf-8");
 
-		User user = userService.seach(id);
+		Alert alert = alertService.seach(id);
+		
+		if(alert == null){
+			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 
-		if (user == null) {
-		return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
-		} else {
-
-			return new ResponseEntity<String>(toJson(user), headers, HttpStatus.OK);
-
+		}else{
+			return new ResponseEntity<String>(toJson(alert), headers, HttpStatus.OK);
+	
 		}
-
+		
 	}
 
 }
