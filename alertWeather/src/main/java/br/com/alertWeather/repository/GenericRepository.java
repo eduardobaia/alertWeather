@@ -23,7 +23,7 @@ public abstract class GenericRepository<T> {
 	protected EntityManager entityManager;
 
 	@Transactional
-	public void savaUpdate(Object object){
+	public void saveUpdate(Object object){
 		Session session = entityManager.unwrap(Session.class);
 		session.saveOrUpdate(object);
 	}

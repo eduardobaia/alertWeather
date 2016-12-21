@@ -57,5 +57,8 @@ public class UserRepository extends GenericRepository<User> {
 		return pageList(sql, parameters, 1, 10);
 
 	}
+	
+	
+	
 
 }

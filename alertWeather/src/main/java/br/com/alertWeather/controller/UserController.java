@@ -8,10 +8,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alertWeather.entity.User;
 import br.com.alertWeather.services.UserService;
@@ -76,4 +80,41 @@ public class UserController extends GenericController<User> {
 
 	}
 
+	
+	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+	public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder){
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json; charset=utf-8");
+		
+		User user = fromJson(json);
+		userService.saveUpdate(user);
+		
+		RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
+		headers.add("Location",uriBuilder.path(a.value()[0]).build().toUriString());
+		
+		return new ResponseEntity<String>(toJson(user), headers, HttpStatus.CREATED);
+			
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
+	public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Integer id) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+
+		User user = fromJson (json);
+		user.setId(id);
+		
+		try{
+			userService.saveUpdate(user);
+		}
+		catch(Exception e){
+			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<String>(headers, HttpStatus.OK);
+	}
+	
+	
 }

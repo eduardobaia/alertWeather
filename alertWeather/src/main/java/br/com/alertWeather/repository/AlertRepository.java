@@ -1,8 +1,9 @@
 package br.com.alertWeather.repository;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.alertWeather.entity.Alert;
@@ -12,7 +13,7 @@ import br.com.alertWeather.util.AlertWeatherUtil;
 @Repository
 public class AlertRepository  extends GenericRepository<Alert>{
 
-	public Long counter(String name, String description, String temp, String city, String state) {
+	public Long counter(String name, String description, String temp, String city, String state, Integer userId) {
 
 		StringBuilder sql = new StringBuilder("SELECT COUNT (a) FROM Alert a");
 		
@@ -47,10 +48,16 @@ public class AlertRepository  extends GenericRepository<Alert>{
 		}
 		
 		
+		if(!AlertWeatherUtil.isNullOrZero(userId)){
+			setSQL(sql, "a.user.id = :userId");
+			parameters.put("userId", userId);
+		}
+		
+		
 		return counter(sql, parameters);
 	}
 
-	public List <Alert> seach (String name, String description, String temp, String city, String state) {
+	public List <Alert> seach (String name, String description, String temp, String city, String state, Integer userId, Integer page, Integer qnt) {
 
 		
 		StringBuilder sql = new StringBuilder("SELECT a FROM Alert a");
@@ -86,10 +93,15 @@ public class AlertRepository  extends GenericRepository<Alert>{
 			parameters.put("state","%"+ state +"%" );
 		}
 		
+
+		if(!AlertWeatherUtil.isNullOrZero(userId)){
+			setSQL(sql, "a.user.id = :uderId");
+			parameters.put("userId", userId);
+		}
+
+			sql.append(" ORDER BY a.name");
 		
-		
-		
-		return pageList(sql, parameters, 1, 10);
+		return pageList(sql, parameters, page, qnt);
 
 	}
 	

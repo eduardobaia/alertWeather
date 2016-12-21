@@ -14,13 +14,19 @@ public class AlertService {
 	@Autowired
 	private AlertRepository repository;
 	
-	public List<Alert> list ( String name, String description, String temp, String city, String state){
-		return repository.seach(name, description, temp, city, state);
+	public void saveUpdate(Alert object){
+		repository.saveUpdate(object);
+	}
+	
+	
+	
+	public List<Alert> list ( String name, String description, String temp, String city, String state, Integer userId, Integer page, Integer qnt){
+		return repository.seach(name, description, temp, city, state, userId, page, qnt);
 				
 	}
 	
-	public Long counter( String name, String description, String temp, String city, String state){
-		return repository.counter(name, description, temp, city, state);
+	public Long counter( String name, String description, String temp, String city, String state, Integer userId){
+		return repository.counter(name, description, temp, city, state, userId);
 		
 	}
 	
