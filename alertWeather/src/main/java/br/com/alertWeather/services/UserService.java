@@ -13,10 +13,14 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repository;
-
+	
+	
+	
 	public void saveUpdate(User object) {
 
 		repository.saveUpdate(object);
+
+	
 	}
 
 	public List<User> list(String name, String password) {

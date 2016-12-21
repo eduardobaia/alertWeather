@@ -19,30 +19,30 @@ public class AlertRepository  extends GenericRepository<Alert>{
 		
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		
-		if(AlertWeatherUtil.isNullOrEmpty(name)){
+		if(!AlertWeatherUtil.isNullOrEmpty(name)){
 			setSQL(sql, "a.name LIKE :name");
 			parameters.put("name","%"+ name +"%" );
 		}
 		
 
-		if(AlertWeatherUtil.isNullOrEmpty(description)){
+		if(!AlertWeatherUtil.isNullOrEmpty(description)){
 			setSQL(sql, "a.description LIKE :description");
 			parameters.put("description","%"+ description +"%" );
 		}
 		
 		
-		if(AlertWeatherUtil.isNullOrEmpty(temp)){
+		if(!AlertWeatherUtil.isNullOrEmpty(temp)){
 			setSQL(sql, "a.temp LIKE :temp");
 			parameters.put("temp","%"+ temp +"%" );
 		}
 		
 		
-		if(AlertWeatherUtil.isNullOrEmpty(city)){
+		if(!AlertWeatherUtil.isNullOrEmpty(city)){
 			setSQL(sql, "a.city LIKE :city");
 			parameters.put("city","%"+ city +"%" );
 		}
 		
-		if(AlertWeatherUtil.isNullOrEmpty(state)){
+		if(!AlertWeatherUtil.isNullOrEmpty(state)){
 			setSQL(sql, "a.state LIKE :state");
 			parameters.put("state","%"+ state +"%" );
 		}
@@ -65,30 +65,30 @@ public class AlertRepository  extends GenericRepository<Alert>{
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		
 
-		if(AlertWeatherUtil.isNullOrEmpty(name)){
+		if(!AlertWeatherUtil.isNullOrEmpty(name)){
 			setSQL(sql, "a.name LIKE :name");
 			parameters.put("name","%"+ name +"%" );
 		}
 		
 
-		if(AlertWeatherUtil.isNullOrEmpty(description)){
+		if(!AlertWeatherUtil.isNullOrEmpty(description)){
 			setSQL(sql, "a.description LIKE :description");
 			parameters.put("description","%"+ description +"%" );
 		}
 		
 		
-		if(AlertWeatherUtil.isNullOrEmpty(temp)){
+		if(!AlertWeatherUtil.isNullOrEmpty(temp)){
 			setSQL(sql, "a.temp LIKE :temp");
 			parameters.put("temp","%"+ temp +"%" );
 		}
 		
 		
-		if(AlertWeatherUtil.isNullOrEmpty(city)){
+		if(!AlertWeatherUtil.isNullOrEmpty(city)){
 			setSQL(sql, "a.city LIKE :city");
 			parameters.put("city","%"+ city +"%" );
 		}
 		
-		if(AlertWeatherUtil.isNullOrEmpty(state)){
+		if(!AlertWeatherUtil.isNullOrEmpty(state)){
 			setSQL(sql, "a.state LIKE :state");
 			parameters.put("state","%"+ state +"%" );
 		}
