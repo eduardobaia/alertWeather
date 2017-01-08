@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+
+  <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+  <meta charset="UTF-8" />
+  <script data-require="angularjs@1.5.7" data-semver="1.5.7" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+<style>
+
+  .jumbotron{
+		width:600px;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+
+		}
+
+    .form-control{
+		
+      width: 200px;s
+      align-content: center;
+		}
+
+.p1{
+  align-items: center;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.container{
+
+  
+  align: center;
+
+       align-content: center;
+      width: 300px;
+}
+.panel{
+	margin-bottom: 10px;
+    margin-top: 20px;
+
+     align-content: center;
+  
+}
+.btn{
+
+width: 200px;
+margin-top: 10px;
+
+}
+
+
+.text{
+  
+  
+  color: brown;
+      width: 300px;
+}
+</style>
+
+</head>
+
+<body ng-controller='mainApp' >
+ 
+ 
+ 
+ <p  ng-if="{{error == null }}">nulo </p>
+  {{error}}
+<div class="jumbotron">
+  <div class="container" >
+
+
+      <img src="http://www.curiosityflux.com/wp-content/uploads/2015/08/temperatura.jpg" title="{{user.name}}" class="img-responsive" />
+     <h1>Alert Weather</h1>
+   
+   <span class="label label-default"> Make sure that's not rainning.</span></h3>
+   
+    
+    
+     </div>
+   
+ 
+ <div class="p1">
+
+
+    <form name="searchUser" >
+<div> <h4>City:</h4> <input class="form-control" type="search" placeholder="type your city" ng-model="cidade" /></div>
+      <div> <h4>Country:</h4> <input class="form-control" type="search" placeholder="type your country" ng-model="pais" /> </div>
+      <button  class="btn btn-primary" ng-click="alterarTempo(cidade,pais)">Search</button>
+</div>
+    <!--   <input type="submit" value="Seach" ng-click="alterarTempo(cidade,pais)" /> {{erro}} -->
+    </form>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Temperature</h2>
+  </div><!-- fim .panel-heading -->
+  <div class="panel-body">
+
+    <!-- ... aqui vai o <dl> que já temos hoje ... -->
+  <div >Nome: {{user.name}}</div>
+      <div>Location:{{user.weather[0].main}}</div>
+      <div>Description: {{user.weather[0].description}}</div>
+      <!--  <img src="http://static.duolingo.com/images/email/2014/duo.png" title="{{user.name}}">-->
+      <div>Latidute:{{user.coord.lat}}</div>
+      <div>Temperature:{{user.main.temp}} </div>
+  </div><!-- fim .panel-body -->
+ </div></div><!-- fim .panel -->
+
+
+
+    </form>
+  </div>
+
+ </div>
+
+
+</body>
+
+</html>
