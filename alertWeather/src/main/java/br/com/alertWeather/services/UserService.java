@@ -35,4 +35,9 @@ public class UserService {
 		return repository.seachById(id);
 	}
 
+	public void delete(User object){
+		
+		repository.delete(object);
+	}
+	
 }
