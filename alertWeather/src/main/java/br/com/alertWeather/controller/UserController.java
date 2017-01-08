@@ -8,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -116,5 +115,26 @@ public class UserController extends GenericController<User> {
 		return new ResponseEntity<String>(headers, HttpStatus.OK);
 	}
 	
+	
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+	public ResponseEntity<String> deleteFromJson(@PathVariable("id") Integer id) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json");
+
+		User user =  new User();
+		user.setId(id);
+
+		try{
+			userService.delete(user);
+
+		}
+		catch(Exception e){
+			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<String>(headers, HttpStatus.OK);
+	}
 	
 }

@@ -39,6 +39,7 @@ public class Alert {
 	@Column(name="STATE")
 	private String state;
 	
+	//@Deprecated
 	@ManyToOne
 	@JoinColumn (name="USER_ID")
 	private User user;

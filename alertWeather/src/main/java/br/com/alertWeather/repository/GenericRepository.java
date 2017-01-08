@@ -31,6 +31,7 @@ public abstract class GenericRepository<T> {
 	@Transactional
 	public void delete(Object object){
 		Session session = entityManager.unwrap(Session.class);
+	//	session.merge(object); //acrescentei aqui .
 		session.delete(object);
 	}
 

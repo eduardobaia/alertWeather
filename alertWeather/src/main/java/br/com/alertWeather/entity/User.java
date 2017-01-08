@@ -3,6 +3,7 @@ package br.com.alertWeather.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class User {
     private String password;
 	
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Alert> alerts;
 
 
