@@ -27,6 +27,15 @@ public class CORSFilter implements Filter{
 		
 		
 		HttpServletRequest request = (HttpServletRequest) req;
+		
+		if("OPTIONS".equals(request.getMethod())){
+			HttpServletResponse response = (HttpServletResponse) res;
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			chain.doFilter(request, response);
+			return;
+		}
+		
+		
 		String url = request.getHeader("Origin");
 		
 		HttpServletResponse response = (HttpServletResponse) res;
